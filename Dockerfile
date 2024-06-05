@@ -9,6 +9,8 @@ COPY . /app
 
 # Install the required packages
 RUN pip install --no-cache-dir flask
+RUN pip install --no-cache-dir morse_code
+RUN pip install --no-cache-dir random2
 
 # Expose port 5000 for the Flask app
 EXPOSE 5000
