@@ -1,4 +1,7 @@
 from flask import Flask, request, jsonify
+from text_generator import generate_text  # Import the function from text_generator.py
+import random
+import string
 
 app = Flask(__name__)
 
@@ -67,14 +70,14 @@ def home():
         <body>
             <div class="container">
                 <h1>Random Text Generator</h1>
-                <form action="/generate" method="post">
+                <form id="text-form">
                     <input type="text" id="input_string" name="input_string" placeholder="Enter a string" required>
                     <input type="submit" value="Generate">
                 </form>
                 <div id="result" class="result"></div>
             </div>
             <script>
-                document.querySelector('form').addEventListener('submit', async function(event) {
+                document.getElementById('text-form').addEventListener('submit', async function(event) {
                     event.preventDefault();
                     const formData = new FormData(event.target);
                     const response = await fetch('/generate', {
@@ -92,7 +95,7 @@ def home():
 @app.route('/generate', methods=['POST'])
 def generate():
     input_string = request.form['input_string']
-    random_text = ''.join(random.choices(string.ascii_letters + string.digits, k=len(input_string)))
+    random_text = generate_text(input_string)
     return jsonify({"input": input_string, "random_text": random_text})
 
 if __name__ == "__main__":
