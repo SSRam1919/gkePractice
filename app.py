@@ -1,7 +1,5 @@
 from flask import Flask, request, jsonify
-from text_generator import generate_text  # Import the function from text_generator.py
-import random
-import string
+from text_generator import generate_text
 
 app = Flask(__name__)
 
@@ -59,11 +57,21 @@ def home():
                 input[type="submit"]:hover {
                     background-color: #0056b3;
                 }
-                .result {
+                .result-container {
                     margin-top: 1rem;
+                }
+                .result-block {
                     padding: 1rem;
-                    background: #e9ecef;
                     border-radius: 5px;
+                    margin-bottom: 1rem;
+                }
+                .input-block {
+                    background-color: #d4edda;
+                    color: #155724;
+                }
+                .output-block {
+                    background-color: #f8d7da;
+                    color: #721c24;
                 }
             </style>
         </head>
@@ -74,7 +82,7 @@ def home():
                     <input type="text" id="input_string" name="input_string" placeholder="Enter a string" required>
                     <input type="submit" value="Generate">
                 </form>
-                <div id="result" class="result"></div>
+                <div id="result" class="result-container"></div>
             </div>
             <script>
                 document.getElementById('text-form').addEventListener('submit', async function(event) {
@@ -85,7 +93,10 @@ def home():
                         body: formData
                     });
                     const result = await response.json();
-                    document.getElementById('result').innerText = `Input: ${result.input}\nRandom Text: ${result.random_text}`;
+                    document.getElementById('result').innerHTML = `
+                        <div class="result-block input-block">Input: ${result.input}</div>
+                        <div class="result-block output-block">Random Text: ${result.random_text}</div>
+                    `;
                 });
             </script>
         </body>
