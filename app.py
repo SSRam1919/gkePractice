@@ -97,6 +97,7 @@ def home():
                         <div class="result-block input-block">Input: ${result.input}</div>
                         <div class="result-block output-block">Random Text: ${result.random_text}</div>
                     `;
+                    document.getElementById('input_string').value = '';  // Clear the input field
                 });
             </script>
         </body>
