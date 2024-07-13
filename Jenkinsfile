@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/text-generator-app.git'
+                git 'https://github.com/SSRam1919/gkePractice.git'
             }
         }
 
